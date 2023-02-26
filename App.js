@@ -1,50 +1,7 @@
-import { View, Text, StyleSheet, FlatList, TextInput } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TextInput, Image, Button, TouchableOpacity } from 'react-native';
 import { AntDesign, MaterialIcons, Entypo } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
-const TODOS = [
-	{
-		id: 1,
-		title: 'manger le soir',
-		time: '07:30',
-		location: 'my home',
-		frequency: 'daily',
-		isFinished: true
-	},
-	{
-		id: 2,
-		title: 'coucher le bebe',
-		time: '22:00',
-		location: 'my home',
-		frequency: 'daily',
-		isFinished: false
-	},
-	{
-		id: 3,
-		title: 'manger le matin',
-		time: '11:25',
-		location: 'gym',
-		frequency: 'weekly',
-		isFinished: true
-	},
-	{
-		id: 4,
-		title: 'Designer affiche',
-		time: '11:25',
-		location: 'gym',
-		frequency: 'monthly',
-		isFinished: false
-	},
-	{
-		id: 5,
-		title: 'jouer',
-		time: '11:25',
-		location: 'restaurant',
-		frequency: 'daily',
-		isFinished: false
-	},
-];
 
 
 export default function App() {
@@ -52,45 +9,38 @@ export default function App() {
 		<SafeAreaView style={styles.container}>
 			<StatusBar style='auto' />
 			<View style={styles.topSection}>
-				<View style={styles.topSectionRight}>
-					<Text style={styles.topSectionTitle}>Aujourd'hui</Text>
-					<Text style={styles.topSectionSubTitle}>Fevrier 20</Text>
-					<AntDesign name="caretdown" style={styles.topSectionIcon} size={10} color="gray" />
-				</View>
-				<AntDesign name="search1" size={35} color="black" />
+				<Text style={styles.topSectionTitle}>Get Started</Text>
+			</View>
+			<View style={styles.imageSection}>
+				<Image source={require('./assets/undraw_Mobile_posts_re_bpuw.png')} style={styles.image} />
 			</View>
 			<View style={styles.bottomSection}>
-				<FlatList
-					data={TODOS}
-					renderItem={({ item }) =>
-						<View style={styles.itemContainer}>
-							{
-								(item.isFinished) ? (
-									<AntDesign name="checkcircle" size={40} color="green" />
-								) : (
-									<MaterialIcons name="radio-button-unchecked" size={50} color="gray" />
-								)
-							}
-							<View style={styles.itemContainerContent}>
-								<Text style={styles.itemContainerContentTitle}>{item.title}</Text>
-								<View style={styles.itemContainerContentMetadata}>
-									<Text style={styles.metadata}>{item.time}</Text>
-									<Entypo name="dot-single" size={24} color="gray" />
-									<Text style={styles.metadata}>{item.location}</Text>
-									<Entypo name="dot-single" size={24} color="gray" />
-									<Text style={styles.metadata}>{item.frequency}</Text>
-								</View>
-							</View>
-						</View>
-					}
-					keyExtractor={item => item.id}
-				/>
-			</View>
-			<View style={styles.inputSection}>
-				<TextInput
-					style={styles.inputContainer}
-					placeholder={'Ajouter une tache'}
-				/>
+				<View style={styles.bottomSectionTopContainer}>
+					<Text style={styles.topContainerTitle}>Tract job pro</Text>
+					<Text style={styles.topContainerSubTitle}>get the job instantly based on your need</Text>
+				</View>
+				<View style={styles.bottomSectionAction}>
+					<TouchableOpacity
+						onPress={() => {
+							alert('go to signin');
+						}}
+						style={styles.buttonSignUp}
+					>
+						<Text style={styles.buttonSignUpStyle}>Sign Up</Text>
+					</TouchableOpacity>
+				</View>
+				<View style={styles.bottomSectionEndContainer}>
+					<Text>
+						Already have an account?
+					</Text>
+					<TouchableOpacity
+						onPress={() => {
+							alert('go to login')
+						}}
+					>
+						<Text style={{ fontWeight: 'bold' }}> Login</Text>
+					</TouchableOpacity>
+				</View>
 			</View>
 		</SafeAreaView>
 	);
@@ -98,70 +48,72 @@ export default function App() {
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: '#fff',
 		flex: 1,
-		paddingHorizontal: 5,
+		backgroundColor: '#fff',
 	},
 	topSection: {
 		flex: 1,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-		paddingHorizontal: 20,
-		borderBottomWidth: 0.4,
-		borderBottomColor: 'gray'
-	},
-	topSectionRight: {
-		flexDirection: 'row'
+		borderColor: 'red',
+		justifyContent: 'center',
+		alignItems: 'center'
 	},
 	topSectionTitle: {
-		fontSize: 25,
-		textTransform: 'uppercase',
 		fontWeight: 'bold',
-		marginRight: 10
+		fontSize: 16
 	},
-	topSectionSubTitle: {
-		fontSize: 22,
-		marginEnd: 3
+	imageSection: {
+		flex: 3,
+		borderColor: '#ff00ee',
+		justifyContent: 'center',
+		alignItems: 'center'
 	},
-	topSectionIcon: {
-		alignSelf: 'center'
+	image: {
+		width: '75%',
+		height: '75%',
+		resizeMode: 'contain'
 	},
 	bottomSection: {
-		flex: 8,
-		margin: 20
+		flex: 2,
+		borderColor: 'green'
 	},
-	itemContainer: {
-		flexDirection: 'row',
-		marginBottom: 15
-	},
-	itemContainerContent: {
-		marginStart: 10
-	},
-	itemContainerContentMetadata: {
-		flexDirection: 'row'
-	},
-	itemContainerContentTitle: {
-		fontSize: 20,
-		textTransform: 'capitalize',
-		fontWeight: 'bold'
-	},
-	metadata: {
-		fontSize: 17,
-		color: 'gray'
-	},
-	inputSection: {
+	bottomSectionTopContainer: {
 		flex: 1,
-		marginBottom: 5,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	topContainerTitle: {
+		fontWeight: 'bold',
+		fontSize: 22,
+		textTransform: 'capitalize'
+	},
+	topContainerSubTitle: {
+		fontSize: 16,
+		textTransform: 'capitalize'
+	},
+	bottomSectionAction: {
+		flex: 1,
+		alignItems: 'center',
 		justifyContent: 'center'
 	},
-	inputContainer: {
-		borderWidth: 2,
-		borderColor: 'gray',
+	bottomSectionEndContainer: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		flexDirection: 'row'
+	},
+	buttonSignUp: {
+		backgroundColor: '#3B793B',
 		height: 50,
-		borderRadius: 15,
-		paddingHorizontal: 20
-	}
+		width: 150,
+		borderRadius: 25,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	buttonSignUpStyle: {
+		color: '#fff',
+		fontWeight: '800',
+		fontSize: 18
+	},
 });
 
 
