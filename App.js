@@ -65,7 +65,7 @@ export default function App() {
 				<FlatList
 					data={TODOS}
 					renderItem={({ item }) =>
-						<Item data={item} action={'bonjour'} />
+						<Item data={item} />
 					}
 					keyExtractor={item => item.id}
 				/>

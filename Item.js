@@ -3,7 +3,9 @@ import { View, Text, StyleSheet } from "react-native";
 import { AntDesign, MaterialIcons, Entypo } from '@expo/vector-icons';
 
 export default function Item(props) {
+
     const { data } = props;
+
     return (
         <View style={styles.itemContainer}>
             {
