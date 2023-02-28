@@ -1,9 +1,10 @@
-import { View, Text, StyleSheet, FlatList, TextInput } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity } from 'react-native';
 import { AntDesign, MaterialIcons, Entypo } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MyDate from './MyDate';
 import Item from './Item';
+import { useState } from 'react';
 
 const TODOS = [
 	{
@@ -50,6 +51,19 @@ const TODOS = [
 
 
 export default function App() {
+
+	const [todos, setTodos] = useState(TODOS);
+	const [task, setTask] = useState(null);
+
+	console.log('====================================');
+	console.log(task);
+	console.log('====================================');
+
+	const handleAdd = () => {
+		setTodos(prevTodos => ([...prevTodos, { id: todos.length + 1, title: task }]));
+	}
+
+
 	return (
 		<SafeAreaView style={styles.container}>
 			<StatusBar style='auto' />
@@ -63,7 +77,7 @@ export default function App() {
 			</View>
 			<View style={styles.bottomSection}>
 				<FlatList
-					data={TODOS}
+					data={todos}
 					renderItem={({ item }) =>
 						<Item data={item} />
 					}
@@ -72,9 +86,21 @@ export default function App() {
 			</View>
 			<View style={styles.inputSection}>
 				<TextInput
+					value={task}
+					onChangeText={(text) => {
+						setTask(text)
+					}}
 					style={styles.inputContainer}
 					placeholder={'Ajouter une tache'}
 				/>
+				<TouchableOpacity
+					style={styles.actionBn}
+					onPress={() => {
+						handleAdd()
+					}}
+				>
+					<AntDesign name="plus" size={30} color="white" />
+				</TouchableOpacity>
 			</View>
 		</SafeAreaView>
 	);
@@ -113,15 +139,27 @@ const styles = StyleSheet.create({
 	},
 	inputSection: {
 		flex: 1,
+		flexDirection: 'row',
 		marginBottom: 5,
 		justifyContent: 'center',
 	},
 	inputContainer: {
+		flex: 3,
 		borderWidth: 2,
 		borderColor: 'gray',
 		height: 50,
 		borderRadius: 15,
 		paddingHorizontal: 20,
+	},
+	actionBn: {
+		flex: 1,
+		marginHorizontal: 10,
+		backgroundColor: 'green',
+		borderRadius: 50,
+		height: 50,
+		width: 50,
+		justifyContent: 'center',
+		alignItems: 'center'
 	}
 });
 

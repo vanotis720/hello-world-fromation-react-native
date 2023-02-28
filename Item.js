@@ -1,13 +1,15 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign, MaterialIcons, Entypo } from '@expo/vector-icons';
 
 export default function Item(props) {
 
-    const { data } = props;
+    const { data, updateTodo } = props;
 
     return (
-        <View style={styles.itemContainer}>
+        <TouchableOpacity style={styles.itemContainer}
+            onPress={() => console.log('lol')}
+        >
             {
                 (data.isFinished) ? (
                     <AntDesign name="checkcircle" size={40} color="green" />
@@ -25,7 +27,7 @@ export default function Item(props) {
                     <Text style={styles.metadata}>{data.frequency}</Text>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 };
 
